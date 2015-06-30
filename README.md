@@ -16,7 +16,7 @@ Bash screenshot script for image hosting site [vgy.me](http://vgy.me/)
 
 ## Usage
 
-    $ ./usr/bin/vgy.sh --help
+    $ /usr/bin/vgy.sh --help
     Usage: vgy.sh [OPTION]...
     
     Valid options:
