@@ -9,9 +9,25 @@ LOCAL_DIR="/tmp"
 # Default capture area
 AREA="region"
 
+help() {
+	echo "Usage: `basename $0` [OPTION]..."
+	echo ""
+	echo "Valid options:"
+	echo "  -c, --cursor                 show cursor in screenshots, hidden by default"
+	echo "  -h, --help                   print this help"
+	echo "  -k, --keep                   keep screenshots locally"
+	echo "  --area=[region,active]       desired area of the screenshot, 'region' by default"
+	echo "  --dir=DIR                    directory where the screenshots will be stored locally"
+	echo "  --opt=OPTIONS                additional options to pass to maim"
+}
+
 while [ $# -gt 0 ]; do
 	key="$1"
 	case $key in
+		-h|--help)
+		help
+		exit 1
+		;;
 		--dir=*) # Local directory where the screenshots will be saved
 		KEEP_FILES=true
 		LOCAL_DIR="${1#*=}"
@@ -19,13 +35,13 @@ while [ $# -gt 0 ]; do
 		--opt=*) # Additional options to pass to maim
 		MAIM_OPT="${1#*=}"
 		;;
-		--keep) # Don't delete local file after uploading
+		-k|--keep) # Don't delete local file after uploading
 		KEEP_FILES=true
 		;;
 		-c|--cursor) # Show cursor in the screenshoft, off by default
 		SHOW_CURSOR=true
 		;;
-		-a|--area) # Desired area of the screenshot, can be 'region' or 'active'
+		--area) # Desired area of the screenshot, can be 'region' or 'active'
 		AREA="$2"
 		shift
 		;;
@@ -45,7 +61,7 @@ case $AREA in
 	;;
 esac
 
-if [[ $SHOW_CURSOR -eq "true" ]]; then
+if [[ $SHOW_CURSOR -ne "true" ]]; then
 	MAIM_OPT="${MAIM_OPT} --hidecursor"
 fi
 
