@@ -1,5 +1,3 @@
-<snippet>
-  <content><![CDATA[
 # vgy.sh
 
 Bash screenshot script for image hosting site [vgy.me](http://vgy.me/)
